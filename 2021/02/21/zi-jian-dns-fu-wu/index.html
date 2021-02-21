@@ -316,14 +316,14 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="自建DNS服务-k8s学习二"><a href="#自建DNS服务-k8s学习二" class="headerlink" title="自建DNS服务(k8s学习二)"></a>自建DNS服务(k8s学习二)</h1><p>记录本次学习k8s搭建集群的经过</p>
-<h2 id="安装Bind"><a href="#安装Bind" class="headerlink" title="安装Bind"></a>安装Bind</h2><p>route0-50 被我预留为做DNS服务的机器, 所以只在这台安装bind</p>
+<h2 id="安装Bind"><a href="#安装Bind" class="headerlink" title="安装Bind"></a>安装Bind</h2><p>dns0-50 被我预留为做DNS服务的机器, 所以只在这台安装bind</p>
 <blockquote>
 <p>Bind(Berkeley Internet Name Domain Service)，它是一款实现DNS服务器的开放源码软件,够提供双向解析，转发，子域授权，view等功能,是世界上使用最为广泛的DNS服务器软件，目前Internet上半数以上的DNS服务器有都是用Bind来架设的。</p>
 </blockquote>
 <pre class="line-numbers language-none"><code class="language-none">yum install -y bind
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>查看版本: </p>
-<pre class="line-numbers language-none"><code class="language-none">[root@route0-50 ~]# named -v
+<pre class="line-numbers language-none"><code class="language-none">[root@dns0-50 ~]# named -v
 BIND 9.11.20-RedHat-9.11.20-5.el8 (Extended Support Version) &lt;id:f3d1d66&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="安装常用工具"><a href="#安装常用工具" class="headerlink" title="安装常用工具"></a>安装常用工具</h2><pre class="line-numbers language-none"><code class="language-none">yum install -y wget
@@ -339,7 +339,7 @@ yum install -y vim
 yum install -y less
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="配置Bind"><a href="#配置Bind" class="headerlink" title="配置Bind"></a>配置Bind</h2><pre class="line-numbers language-none"><code class="language-none">[root@route0-50 ~]# vim /etc/named.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="配置Bind"><a href="#配置Bind" class="headerlink" title="配置Bind"></a>配置Bind</h2><pre class="line-numbers language-none"><code class="language-none">[root@dns0-50 ~]# vim /etc/named.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>修改配置:</p>
 <pre class="line-numbers language-none"><code class="language-none">options {
