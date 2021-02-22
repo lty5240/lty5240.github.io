@@ -407,9 +407,9 @@ zone "host.com" IN {
         allow-update { 192.168.0.50; };
 };
 
-zone "od.com" IN {
+zone "gy.com" IN {
         type master;
-        file "od.com.zone";
+        file "gy.com.zone";
         allow-update { 192.168.0.50; };
 };<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>修改 <code>/var/named/host.com.zone</code></p>
@@ -430,17 +430,17 @@ sh0-21          A       192.168.0.21
 sh0-30          A       192.168.0.30
 sh0-31          A       192.168.0.31<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>修改 <code>/var/named/od.com.zone</code></p>
-<pre class="line-numbers language-none"><code class="language-none">$ORIGIN od.com.
+<p>修改 <code>/var/named/gy.com.zone</code></p>
+<pre class="line-numbers language-none"><code class="language-none">$ORIGIN gy.com.
 $TTL 600  ; 10 minutes
-@       IN SOA  dns.od.com. dnsadmin.od.com. (
+@       IN SOA  dns.gy.com. dnsadmin.gy.com. (
         2021022101 ; serial
         10800      ; refresh (3 hours)
         900        ; retry (15 minutes)
         604800     ; expire (1 week)
         86400      ; minimum (1 day)
         )
-        NS   dns.od.com.
+        NS   dns.gy.com.
 $TTL 60 ; 1 minute
 dns                A    192.168.0.50<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
@@ -461,7 +461,7 @@ NETMASK=255.255.255.0
 GATEWAY=192.168.0.1
 DNS1=192.168.0.50<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>然后测试ping </p>
+<p>然后测试ping</p>
 <pre class="line-numbers language-none"><code class="language-none">[root@sh0-20 ~]# ping sh0-31
 PING sh0-31.host.com (192.168.0.31) 56(84) bytes of data.
 64 bytes from 192.168.0.31 (192.168.0.31): icmp_seq=1 ttl=64 time=0.970 ms
@@ -765,18 +765,17 @@ PING sh0-31.host.com (192.168.0.31) 56(84) bytes of data.
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/02/21/zi-jian-dns-fu-wu/">
+                <a href="/2021/02/21/zi-qian-zheng-shu-yu-docker-huan-jing-yu-zi-jian-cang-ku/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="自建DNS服务(k8s学习二)">
+                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="自签证书与docker环境与自建仓库(k8s学习三)">
                         
-                        <span class="card-title">自建DNS服务(k8s学习二)</span>
+                        <span class="card-title">自签证书与docker环境与自建仓库(k8s学习三)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -786,9 +785,9 @@ PING sh0-31.host.com (192.168.0.31) 56(84) bytes of data.
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-21
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-21
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -797,7 +796,6 @@ PING sh0-31.host.com (192.168.0.31) 56(84) bytes of data.
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1050,7 +1048,7 @@ PING sh0-31.host.com (192.168.0.31) 56(84) bytes of data.
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">1.6k</span>&nbsp;字
+                class="white-color">2.6k</span>&nbsp;字
             
             
             

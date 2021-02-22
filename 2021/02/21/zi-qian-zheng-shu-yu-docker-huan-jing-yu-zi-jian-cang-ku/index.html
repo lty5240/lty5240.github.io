@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="逆水行舟,不进则退, 全栈,日记">
+    <meta name="keywords" content="自签证书与docker环境与自建仓库(k8s学习三), 全栈,日记">
     <meta name="description" content="个人博客, 主要一些技术心得与日记">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>逆水行舟,不进则退 | 羽の时光</title>
+    <title>自签证书与docker环境与自建仓库(k8s学习三) | 羽の时光</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/libs/awesome/css/all.css">
@@ -139,12 +139,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">逆水行舟,不进则退</h1>
+                    <h1 class="description center-align post-title">自签证书与docker环境与自建仓库(k8s学习三)</h1>
                 </div>
             </div>
         </div>
@@ -260,12 +260,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%97%A5%E8%AE%B0/">
-                                <span class="chip bg-color">日记</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%BF%83%E6%83%85/">
-                                <span class="chip bg-color">心情</span>
+                            <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                                <span class="chip bg-color">后端</span>
                             </a>
                         
                     </div>
@@ -280,7 +276,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-07
+                    2021-02-21
                 </div>
                 
 
@@ -289,14 +285,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    206
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -319,20 +315,181 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="为什么要重新开始写博客"><a href="#为什么要重新开始写博客" class="headerlink" title="为什么要重新开始写博客"></a>为什么要重新开始写博客</h4><p>主要是觉得,已经很久没有深入学习一门技术了,总是停留在业务代码上,反观去年,过年期间还撸了MGR,所以感觉2020年还是有点退步的<br>想从今天起, 生活节奏能有点变化, 加油.</p>
-<h4 id="要怎么样有所改变"><a href="#要怎么样有所改变" class="headerlink" title="要怎么样有所改变"></a>要怎么样有所改变</h4><p>我觉得主要做到以下几点</p>
-<ol>
-<li>想做什么就去做, 精神愉悦也是效率的前置条件</li>
-<li>专注, 安排好做一件事就好好做掉,不要中途停下,就算停下也要马上进入状态</li>
-<li>每天要做做题, 看看书</li>
-</ol>
-<h4 id="关于年底和明年的构想"><a href="#关于年底和明年的构想" class="headerlink" title="关于年底和明年的构想"></a>关于年底和明年的构想</h4><ol>
-<li>完成手上公司的项目</li>
-<li>小链项目开始</li>
-<li>每天多花点时间看看新的技术</li>
-<li>筹办创业的事</li>
-</ol>
-<iframe src="//player.bilibili.com/player.html?aid=1031924&amp;bvid=BV1Bs411Z7AV&amp;cid=1494043&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600px"> </iframe>
+                <h1 id="自签证书"><a href="#自签证书" class="headerlink" title="自签证书"></a>自签证书</h1><h2 id="下载相关软件包"><a href="#下载相关软件包" class="headerlink" title="下载相关软件包"></a>下载相关软件包</h2><pre class="line-numbers language-none"><code class="language-none">wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/local/bin/cfssl
+wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/local/bin/cfssl-json
+wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/local/bin/cfssl-certinfo
+
+# 可执行
+chmod u+x /usr/local/bin/cfssl*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="进入工作目录"><a href="#进入工作目录" class="headerlink" title="进入工作目录"></a>进入工作目录</h2><pre class="line-numbers language-none"><code class="language-none">cd /opt &amp;&amp; mkdir certs &amp;&amp; cd certs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="编写ca-csr-json"><a href="#编写ca-csr-json" class="headerlink" title="编写ca-csr.json"></a>编写ca-csr.json</h2><pre class="line-numbers language-none"><code class="language-none">{
+    "CN": "lintyone",
+    "hosts": [
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "shenzhen",
+            "L": "shenzhen",
+            "O": "gy",
+            "OU": "ops"
+        }
+    ],
+    "ca": {
+        "expiry": "175200h"
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="签证书"><a href="#签证书" class="headerlink" title="签证书"></a>签证书</h2><pre class="line-numbers language-none"><code class="language-none">cfssl gencert -initca ca-csr.json | cfssl-json -bare ca<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>生成以下文件</p>
+<pre class="line-numbers language-none"><code class="language-none">[root@dns0-50 certs]# ll
+total 16
+-rw-r--r--. 1 root root  997 Feb 21 05:53 ca.csr
+-rw-r--r--. 1 root root  330 Feb 21 05:47 ca-csr.json
+-rw-------. 1 root root 1679 Feb 21 05:53 ca-key.pem
+-rw-r--r--. 1 root root 1346 Feb 21 05:53 ca.pem<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h1 id="Docker环境"><a href="#Docker环境" class="headerlink" title="Docker环境"></a>Docker环境</h1><p>本次在  dns0-50 sh0-20 sh0-21 三台机子安装Docker</p>
+<p>配置 base 源, 不然找不到很多包</p>
+<pre class="line-numbers language-none"><code class="language-none">vi /etc/yum.repos.d/CentOS-Base.repo
+
+# CentOS-Base.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for CentOS updates
+# unless you are manually picking other mirrors.
+#
+# If the mirrorlist= does not work for you, as a fall back you can try the
+# remarked out baseurl= line instead.
+#
+#
+
+
+
+[BaseOS]
+name=CentOS-$releasever - Base
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/BaseOS/$basearch/os/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=BaseOS&amp;infra=$infra
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+
+[AppStream]
+name=CentOS-$releasever - AppStream
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/AppStream/$basearch/os/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=AppStream&amp;infra=$infra
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+
+[PowerTools]
+name=CentOS-$releasever - PowerTools
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/PowerTools/$basearch/os/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=PowerTools&amp;infra=$infra
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/extras/$basearch/os/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=extras
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+
+
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/centosplus/$basearch/os/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=centosplus
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="装docker"><a href="#装docker" class="headerlink" title="装docker"></a>装docker</h2><pre class="line-numbers language-none"><code class="language-none">yum -y install http://mirror.centos.org/centos/8/AppStream/x86_64/os/Packages/container-selinux-2.144.0-1.module_el8.3.0+475+c50ce30b.noarch.rpm
+yum erase podman buildah
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Docker配置"><a href="#Docker配置" class="headerlink" title="Docker配置"></a>Docker配置</h2><p>创建文件夹</p>
+<pre class="line-numbers language-none"><code class="language-none">mkdir -p /data/docker /etc/docker<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="编写配置文件"><a href="#编写配置文件" class="headerlink" title="编写配置文件"></a>编写配置文件</h4><p><code>vim /etc/docker/daemon.json</code></p>
+<p>注意这里的bip 是根据机器的ip的, dns0-50  ip 是50 , 所以bip为172.7.50.1/24 这样方便识别</p>
+<pre class="line-numbers language-none"><code class="language-none">{
+  "graph": "/data/docker",
+  "storage-driver": "overlay2",
+  "insecure-registries": ["registry.access.redhat.com","quay.io","harbor.gy.com"],
+  "registry-mirrors": [
+    "https://registry.docker-cn.com",
+    "http://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn"
+  ],
+  "bip": "172.7.50.1/24",
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "live-restore": true
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后启动<br><code>systemctl start docker</code></p>
+<p>可以通过 <code>docker info</code> 查看docker 当前状态</p>
+<h1 id="自建Docker仓库"><a href="#自建Docker仓库" class="headerlink" title="自建Docker仓库"></a>自建Docker仓库</h1><h2 id="下载harbor"><a href="#下载harbor" class="headerlink" title="下载harbor"></a>下载harbor</h2><pre class="line-numbers language-none"><code class="language-none">mkdir /opt/src &amp;&amp; cd /opt/src/
+
+mkdir -p /data/harbor/logs
+
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.28.4/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
+
+chmod +x /usr/local/bin/docker-compose
+
+wget https://github.com/goharbor/harbor/releases/download/v2.0.6/harbor-online-installer-v2.0.6.tgz
+
+cp harbor.yml.tmpl harbor.yml
+
+vim harbor.yml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>使用online版本,会需要拉取很多docker image ,用outline版本, 会把这些image先下载, 看个人喜好</p>
+</blockquote>
+<h4 id="修改内容"><a href="#修改内容" class="headerlink" title="修改内容"></a>修改内容</h4><pre class="line-numbers language-none"><code class="language-none">hostname: harbor.gy.com
+http:
+  port: 180
+data_volume: /data/harbor
+location: /data/harbor/logs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="执行安装"><a href="#执行安装" class="headerlink" title="执行安装"></a>执行安装</h4><pre class="line-numbers language-none"><code class="language-none">./install.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>如果出现ssl签名的错误,可以先注释掉https部分,或者配上证书</p>
+</blockquote>
+<h4 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h4><p>到这一步已经可以通过180端口访问了</p>
+<p><img src="https://ae01.alicdn.com/kf/U89ff041ddc7c4a0381d824c5725cbfa2F.jpg"></p>
+<h4 id="使用nginx-转发"><a href="#使用nginx-转发" class="headerlink" title="使用nginx 转发"></a>使用nginx 转发</h4><p>使用<code>yum install -y nginx</code>安装nginx</p>
+<p>使用 <code>vim /etc/nginx/conf.d/harbor.gy.com.conf</code> 编辑文件输入以下内容</p>
+<pre class="line-numbers language-none"><code class="language-none">server {
+    listen       80;
+    server_name  harbor.gy.com;
+    # 避免出现上传失败的情况
+    client_max_body_size 1000m;
+
+    location / {
+        proxy_pass http://127.0.0.1:180;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>启动nginx <code>systemctl start nginx</code> 或者如果启动过了就重载配置 <code>nginx -s reload</code></p>
+<blockquote>
+<p>这里要在DNS记录上添加 harbor.gy.com 指向192.168.0.50, 配置不贴, 动0.0001个脑细胞既可得</p>
+</blockquote>
+<h2 id="测试一下Harbor"><a href="#测试一下Harbor" class="headerlink" title="测试一下Harbor"></a>测试一下Harbor</h2><p><code>docker pull nginx:1.19.7</code> 下载一个nginx包,用来测试自建仓库</p>
+<p>使用 <code>docker login harbor.gy.com</code> 登录</p>
+<pre class="line-numbers language-none"><code class="language-none">docker tag nginx:1.7.9  harbor.gy.com/public/nginx:1.7.9
+docker push harbor.gy.com/public/nginx:1.7.9
+docker logout<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可以看到, 已经成功把镜像推送到harbor里了<br><img src="https://ae01.alicdn.com/kf/U3c0a961542414810842b2d0f5251ebdeK.jpg"></p>
 
                 
             </div>
@@ -359,7 +516,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.lintyone.cn/2020/12/07/ni-shui-xing-zhou-bu-jin-ze-tui/">http://www.lintyone.cn/2020/12/07/ni-shui-xing-zhou-bu-jin-ze-tui/</a>
+                    <a href="http://www.lintyone.cn/2021/02/21/zi-qian-zheng-shu-yu-docker-huan-jing-yu-zi-jian-cang-ku/">http://www.lintyone.cn/2021/02/21/zi-qian-zheng-shu-yu-docker-huan-jing-yu-zi-jian-cang-ku/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -397,12 +554,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%97%A5%E8%AE%B0/">
-                                    <span class="chip bg-color">日记</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%BF%83%E6%83%85/">
-                                    <span class="chip bg-color">心情</span>
+                                <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                                    <span class="chip bg-color">后端</span>
                                 </a>
                             
                         </div>
@@ -625,17 +778,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/02/21/xu-ni-ji-da-jian/">
+                <a href="/2021/02/21/zi-qian-zheng-shu-yu-docker-huan-jing-yu-zi-jian-cang-ku/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="虚拟机搭建(k8s学习一)">
+                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="自签证书与docker环境与自建仓库(k8s学习三)">
                         
-                        <span class="card-title">虚拟机搭建(k8s学习一)</span>
+                        <span class="card-title">自签证书与docker环境与自建仓库(k8s学习三)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -645,9 +799,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -656,6 +810,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -671,16 +826,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/07/ni-shui-xing-zhou-bu-jin-ze-tui/">
+                <a href="/2021/02/21/zi-jian-dns-fu-wu/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="逆水行舟,不进则退">
+                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="自建DNS服务(k8s学习二)">
                         
-                        <span class="card-title">逆水行舟,不进则退</span>
+                        <span class="card-title">自建DNS服务(k8s学习二)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -691,7 +846,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-21
                             </span>
                         <span class="publish-author">
                             
@@ -701,16 +856,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%97%A5%E8%AE%B0/">
-                        <span class="chip bg-color">日记</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%BF%83%E6%83%85/">
-                        <span class="chip bg-color">心情</span>
+                    <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                        <span class="chip bg-color">后端</span>
                     </a>
                     
                 </div>
