@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="逆水行舟,不进则退, 全栈,日记">
+    <meta name="keywords" content="搭建ETCD集群(k8s学习四), 全栈,日记">
     <meta name="description" content="个人博客, 主要一些技术心得与日记">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>逆水行舟,不进则退 | 羽の时光</title>
+    <title>搭建ETCD集群(k8s学习四) | 羽の时光</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/libs/awesome/css/all.css">
@@ -139,12 +139,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">逆水行舟,不进则退</h1>
+                    <h1 class="description center-align post-title">搭建ETCD集群(k8s学习四)</h1>
                 </div>
             </div>
         </div>
@@ -260,12 +260,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%97%A5%E8%AE%B0/">
-                                <span class="chip bg-color">日记</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%BF%83%E6%83%85/">
-                                <span class="chip bg-color">心情</span>
+                            <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                                <span class="chip bg-color">后端</span>
                             </a>
                         
                     </div>
@@ -280,7 +276,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-07
+                    2021-02-23
                 </div>
                 
 
@@ -289,14 +285,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    206
+                    962
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -319,21 +315,175 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="为什么要重新开始写博客"><a href="#为什么要重新开始写博客" class="headerlink" title="为什么要重新开始写博客"></a>为什么要重新开始写博客</h4><p>主要是觉得,已经很久没有深入学习一门技术了,总是停留在业务代码上,反观去年,过年期间还撸了MGR,所以感觉2020年还是有点退步的<br>想从今天起, 生活节奏能有点变化, 加油.</p>
-<h4 id="要怎么样有所改变"><a href="#要怎么样有所改变" class="headerlink" title="要怎么样有所改变"></a>要怎么样有所改变</h4><p>我觉得主要做到以下几点</p>
-<ol>
-<li>想做什么就去做, 精神愉悦也是效率的前置条件</li>
-<li>专注, 安排好做一件事就好好做掉,不要中途停下,就算停下也要马上进入状态</li>
-<li>每天要做做题, 看看书</li>
-</ol>
-<h4 id="关于年底和明年的构想"><a href="#关于年底和明年的构想" class="headerlink" title="关于年底和明年的构想"></a>关于年底和明年的构想</h4><ol>
-<li>完成手上公司的项目</li>
-<li>小链项目开始</li>
-<li>每天多花点时间看看新的技术</li>
-<li>筹办创业的事</li>
-</ol>
-<iframe src="//player.bilibili.com/player.html?aid=1031924&amp;bvid=BV1Bs411Z7AV&amp;cid=1494043&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600px"> </iframe>
+                <h1 id="搭建ETCD集群"><a href="#搭建ETCD集群" class="headerlink" title="搭建ETCD集群"></a>搭建ETCD集群</h1><p>etcd 只在 sh0-21 sh0-30 sh0-31 搭建</p>
+<h2 id="使用运维主机sh0-50给etcd签发证书"><a href="#使用运维主机sh0-50给etcd签发证书" class="headerlink" title="使用运维主机sh0-50给etcd签发证书"></a>使用运维主机<code>sh0-50</code>给etcd签发证书</h2><pre class="line-numbers language-none"><code class="language-none">cd /opt/certs/
+vim ca-config.json<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>输入以下内容</p>
+<pre class="line-numbers language-none"><code class="language-none">{
+    "signing": {
+        "default": {
+            "expiry": "175200h"
+        },
+        "profiles": {
+            "server": {
+                "expiry": "175200h",
+                "usages": [
+                    "signing",
+                    "key encipherment",
+                    "server auth"
+                ]
+            },
+            "client": {
+                "expiry": "175200h",
+                "usages": [
+                    "signing",
+                    "key encipherment",
+                    "client auth"
+                ]
+            },
+            "peer": {
+                "expiry": "175200h",
+                "usages": [
+                    "signing",
+                    "key encipherment",
+                    "server auth",
+                    "client auth"
+                ]
+            }
+        }
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<pre class="line-numbers language-none"><code class="language-none">vim etcd-peer-csr.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>输入以下内容</p>
+<blockquote>
+<p>把可能部署的所有IP记录写上</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">{
+    "CN": "k8s-etcd",
+    "hosts": [
+        "192.168.0.20",
+        "192.168.0.21",
+        "192.168.0.30",
+        "192.168.0.31"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "shenzhen",
+            "L": "shenzhen",
+            "O": "gy",
+            "OU": "ops"
+        }
+    ]
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="签证书"><a href="#签证书" class="headerlink" title="签证书"></a>签证书</h4><p>输入命令</p>
+<pre class="line-numbers language-none"><code class="language-none">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json | cfssl-json -bare etcd-peer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>会生成以下文件</p>
+<pre class="line-numbers language-none"><code class="language-none">-rw-r--r--. 1 root root 1066 Feb 23 09:27 etcd-peer.csr
+-rw-r--r--. 1 root root  377 Feb 23 09:23 etcd-peer-csr.json
+-rw-------. 1 root root 1675 Feb 23 09:27 etcd-peer-key.pem
+-rw-r--r--. 1 root root 1432 Feb 23 09:27 etcd-peer.pem<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="安装ETCD"><a href="#安装ETCD" class="headerlink" title="安装ETCD"></a>安装ETCD</h2><blockquote>
+<p>在 021 030 031 安装</p>
+</blockquote>
+<h4 id="新增etcd用户"><a href="#新增etcd用户" class="headerlink" title="新增etcd用户"></a>新增etcd用户</h4><pre class="line-numbers language-none"><code class="language-none">useradd -s /sbin/nologin -M etcd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="下载etcd"><a href="#下载etcd" class="headerlink" title="下载etcd"></a>下载etcd</h4><p>创建目录 <code>mkdir -p /opt/src/ &amp;&amp; cd /opt</code></p>
+<pre class="line-numbers language-none"><code class="language-none">wget https://dl.serctl.com/downloads4/2020-12-08-11-15-38-download-etcd-v3.4.14-linux-amd64.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>自己下载, 这个是一个镜像, gihub官方太慢了, 未来可能都不能用</p>
+</blockquote>
+<p>解压文件,创建软链接ETCD</p>
+<pre class="line-numbers language-none"><code class="language-none">[root@sh0-21 opt]# ll
+total 0
+drwx--x--x. 4 root      root       28 Feb 21 11:35 containerd
+lrwxrwxrwx. 1 root      root       13 Feb 23 11:09 etcd -&gt; etcd-v3.4.14/
+drwxr-xr-x. 3 630384594 600260513 123 Nov 25 15:27 etcd-v3.4.14
+drwxr-xr-x. 2 root      root       33 Feb 23 11:09 src<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="复制证书"><a href="#复制证书" class="headerlink" title="复制证书"></a>复制证书</h4><p>创建目录</p>
+<pre class="line-numbers language-none"><code class="language-none">mkdir -p /opt/etcd/certs /data/etcd /data/logs/etcd-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>进入运维主机<code>sh0-50</code>发放证书给其他主机</p>
+<pre class="line-numbers language-none"><code class="language-none">for i in 21 30 31;do scp ca.pem etcd-peer.pem etcd-peer-key.pem sh0-${i}:/opt/etcd/certs/ ;done<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="创建etcd运行脚本"><a href="#创建etcd运行脚本" class="headerlink" title="创建etcd运行脚本"></a>创建etcd运行脚本</h4><pre class="line-numbers language-none"><code class="language-none">vim /opt/etcd/etcd-server-startup.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>输入以下内容</p>
+<blockquote>
+<p>IP 要按实际填写, 注意集群其他机器的IP</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">#!/bin/sh
+# listen-peer-urls etcd节点之间通信端口
+# listen-client-urls 客户端与etcd通信端口
+# quota-backend-bytes 配额大小
+# 需要修改的参数：name,listen-peer-urls,listen-client-urls,initial-advertise-peer-urls
+
+WORK_DIR=$(dirname $(readlink -f $0))
+[ $? -eq 0 ] &amp;&amp; cd $WORK_DIR || exit
+
+/opt/etcd/etcd --name etcd-server-0-21 \
+    --data-dir /data/etcd/etcd-server \
+    --listen-peer-urls https://192.168.0.21:2380 \
+    --listen-client-urls https://192.168.0.21:2379,http://127.0.0.1:2379 \
+    --quota-backend-bytes 8000000000 \
+    --initial-advertise-peer-urls https://192.168.0.21:2380 \
+    --advertise-client-urls https://192.168.0.21:2379,http://127.0.0.1:2379 \
+    --initial-cluster etcd-server-0-21=https://192.168.0.21:2380,etcd-server-0-30=https://192.168.0.30:2380,etcd-server-0-31=https://192.168.0.31:2380 \
+    --cert-file ./certs/etcd-peer.pem \
+    --key-file ./certs/etcd-peer-key.pem \
+    --client-cert-auth  \
+    --trusted-ca-file ./certs/ca.pem \
+    --peer-cert-file ./certs/etcd-peer.pem \
+    --peer-key-file ./certs/etcd-peer-key.pem \
+    --peer-client-cert-auth \
+    --peer-trusted-ca-file ./certs/ca.pem \
+    --log-outputs stdout \
+    --logger=zap<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>修改文件权限</p>
+<pre class="line-numbers language-none"><code class="language-none">chmod u+x /opt/etcd/etcd-server-startup.sh
+chown -R etcd.etcd /opt/etcd/ /data/etcd /data/logs/etcd-server<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="安装supervisor"><a href="#安装supervisor" class="headerlink" title="安装supervisor"></a>安装supervisor</h2><pre class="line-numbers language-none"><code class="language-none">yum install -y supervisor
+systemctl start supervisord ; systemctl enable supervisord
+
+vim /etc/supervisord.d/etcd-server.ini<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输入以下内容</p>
+<pre class="line-numbers language-none"><code class="language-none">[program:etcd-server-0-21]
+command=/opt/etcd/etcd-server-startup.sh              ; the program (relative uses PATH, can take args)
+numprocs=1                                            ; number of processes copies to start (def 1)
+directory=/opt/etcd                                   ; directory to cwd to before exec (def no cwd)
+autostart=true                                        ; start at supervisord start (default: true)
+autorestart=true                                      ; retstart at unexpected quit (default: true)
+startsecs=30                                          ; number of secs prog must stay running (def. 1)
+startretries=3                                        ; max # of serial start failures (default 3)
+exitcodes=0,2                                         ; 'expected' exit codes for process (default 0,2)
+stopsignal=QUIT                                       ; signal used to kill process (default TERM)
+stopwaitsecs=10                                       ; max num secs to wait b4 SIGKILL (default 10)
+user=etcd                                             ; setuid to this UNIX account to run the program
+redirect_stderr=true                                  ; redirect proc stderr to stdout (default false)
+stdout_logfile=/data/logs/etcd-server/etcd.stdout.log ; stdout log path, NONE for none; default AUTO
+stdout_logfile_maxbytes=64MB                          ; max # logfile bytes b4 rotation (default 50MB)
+stdout_logfile_backups=5                              ; # of stdout logfile backups (default 10)
+stdout_capture_maxbytes=1MB                           ; number of bytes in 'capturemode' (default 0)
+stdout_events_enabled=false                           ; emit events on stdout writes (default false)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>更新supervisor</p>
+<pre class="line-numbers language-none"><code class="language-none">supervisorctl update<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>查看Supervisor执行的状态</p>
+<pre class="line-numbers language-none"><code class="language-none">supervisorctl status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>查看日志</p>
+<pre class="line-numbers language-none"><code class="language-none">tail -fn 200 /data/logs/etcd-server/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查看etcd集群</p>
+<pre class="line-numbers language-none"><code class="language-none">etcdctl --write-out=table --endpoints=localhost:2379 member list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -359,7 +509,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.lintyone.cn/2020/12/07/ni-shui-xing-zhou-bu-jin-ze-tui/">http://www.lintyone.cn/2020/12/07/ni-shui-xing-zhou-bu-jin-ze-tui/</a>
+                    <a href="http://www.lintyone.cn/2021/02/23/da-jian-etcd-ji-qun/">http://www.lintyone.cn/2021/02/23/da-jian-etcd-ji-qun/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -397,12 +547,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%97%A5%E8%AE%B0/">
-                                    <span class="chip bg-color">日记</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%BF%83%E6%83%85/">
-                                    <span class="chip bg-color">心情</span>
+                                <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                                    <span class="chip bg-color">后端</span>
                                 </a>
                             
                         </div>
@@ -625,17 +771,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/02/21/xu-ni-ji-da-jian/">
+                <a href="/2021/02/23/da-jian-etcd-ji-qun/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="虚拟机搭建(k8s学习一)">
+                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="搭建ETCD集群(k8s学习四)">
                         
-                        <span class="card-title">虚拟机搭建(k8s学习一)</span>
+                        <span class="card-title">搭建ETCD集群(k8s学习四)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -645,9 +792,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -656,6 +803,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -671,16 +819,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/07/ni-shui-xing-zhou-bu-jin-ze-tui/">
+                <a href="/2021/02/21/zi-qian-zheng-shu-yu-docker-huan-jing-yu-zi-jian-cang-ku/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="逆水行舟,不进则退">
+                        <img src="https://cdn.jsdelivr.net/gh/lty5240/lty5240.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="自签证书与docker环境与自建仓库(k8s学习三)">
                         
-                        <span class="card-title">逆水行舟,不进则退</span>
+                        <span class="card-title">自签证书与docker环境与自建仓库(k8s学习三)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -691,7 +839,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-21
                             </span>
                         <span class="publish-author">
                             
@@ -701,16 +849,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%97%A5%E8%AE%B0/">
-                        <span class="chip bg-color">日记</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%BF%83%E6%83%85/">
-                        <span class="chip bg-color">心情</span>
+                    <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                        <span class="chip bg-color">后端</span>
                     </a>
                     
                 </div>

@@ -285,7 +285,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    374
+                    403
                 </div>
                 
 
@@ -322,15 +322,22 @@
 <p>首先创建一个Base虚拟机, 用于克隆出其他机子, 系统采用的是CentOS 8</p>
 <pre class="line-numbers language-none"><code class="language-none">Linux sh0-20.host.com 4.18.0-80.el8.x86_64 #1 SMP Tue Jun 4 09:19:46 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后克隆出5个虚拟机</p>
+<p>关闭防火墙</p>
+<pre class="line-numbers language-none"><code class="language-none">setenforce 0
+systemctl disable firewalld.service
+systemctl stop firewalld.service
+sed -ir '/^SELINUX=/s/=.+/=disabled/' /etc/selinux/config
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>网络我是这么规划的, 首先虚拟机全部采用桥接模式, 方便局域网互联, 并且给每个机子修改hostname和静态IP</p>
 <p>网关: 192.168.0.1</p>
 <pre class="line-numbers language-none"><code class="language-none">sh0-20    192.168.0.20
 sh0-21    192.168.0.21
 sh0-30    192.168.0.30
 sh0-31    192.168.0.31
-dns0-50   192.168.0.50  专门用来做DNS服务<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+dns0-50   192.168.0.50  运维主机 包括DNS Docker仓库 配置 签名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>其中一台的示例: </p>
+<p>其中一台的示例:</p>
 <pre class="line-numbers language-none"><code class="language-none">[root@sh0-20 ~]# cat /etc/sysconfig/network-scripts/ifcfg-ens33
 TYPE=Ethernet
 PROXY_METHOD=none
@@ -934,7 +941,7 @@ nmcli c up ens33    # 网卡名<span aria-hidden="true" class="line-numbers-rows
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">2.6k</span>&nbsp;字
+                class="white-color">3.6k</span>&nbsp;字
             
             
             
